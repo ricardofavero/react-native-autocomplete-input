@@ -180,7 +180,7 @@ class Autocomplete extends Component {
 const border = {
   borderColor: '#b9b9b9',
   borderRadius: 1,
-  borderWidth: 1
+  borderWidth: 0
 };
 
 const androidStyles = {
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   },
   ...Platform.select({
     android: { ...androidStyles },
-    ios: { ...iosStyles }
+    ios: { ...androidStyles }
   })
 });
 
