@@ -74,12 +74,15 @@ class Autocomplete extends Component {
     /**
      * renders custom TextInput. All props passed to this function.
      */
-    renderTextInput: PropTypes.func
+    renderTextInput: PropTypes.func,
+
+    emptyValue: PropTypes.string
   };
 
   static defaultProps = {
     data: [],
     defaultValue: '',
+    emptyValue: 'No items found',
     keyboardShouldPersistTaps: 'always',
     onStartShouldSetResponderCapture: () => false,
     renderItem: rowData => <Text>{rowData}</Text>,
@@ -132,6 +135,14 @@ class Autocomplete extends Component {
     );
   }
 
+  renderEmpty(){
+    return(
+      <View style={{flex: 1, alignItems: 'center', paddingTop: 20}}>
+        <Text>{this.props.emptyValue}</Text>
+      </View>
+    )
+  }
+
   renderTextInput() {
     const { onEndEditing, renderTextInput, style } = this.props;
     const props = {
@@ -169,7 +180,7 @@ class Autocomplete extends Component {
             style={listContainerStyle}
             onStartShouldSetResponderCapture={onStartShouldSetResponderCapture}
           >
-            {showResults && this.renderResultList()}
+            {showResults ? this.renderResultList() : this.renderEmpty()}
           </View>
         )}
       </View>
